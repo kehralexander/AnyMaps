@@ -152,8 +152,8 @@ class OsmMap implements AnyMap {
     }
 
     @Override
-    public void setOnCameraChangeListener(OnCameraChangeListener listener) {
-        map.setMapListener(new OsmMapListener(listener));
+    public void setOnCameraIdleListener(OnCameraIdleListener listener) {
+        map.addMapListener(new OsmMapListener(listener));
     }
 
     @Override
@@ -277,13 +277,13 @@ class OsmMap implements AnyMap {
 
     /**
      * Listens for map position changes and delegates them
-     * to {@link com.car2go.maps.AnyMap.OnCameraChangeListener}
+     * to {@link com.car2go.maps.AnyMap.OnCameraIdleListener}
      */
     private class OsmMapListener implements MapListener {
 
-        private final OnCameraChangeListener listener;
+        private final OnCameraIdleListener listener;
 
-        private OsmMapListener(OnCameraChangeListener listener) {
+        private OsmMapListener(OnCameraIdleListener listener) {
             this.listener = listener;
         }
 
@@ -300,9 +300,7 @@ class OsmMap implements AnyMap {
         }
 
         private void notifyListener() {
-            listener.onCameraChange(
-                    currentCameraPosition()
-            );
+            listener.onCameraIdle();
         }
 
     }

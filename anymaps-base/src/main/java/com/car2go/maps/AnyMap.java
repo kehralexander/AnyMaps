@@ -52,7 +52,7 @@ public interface AnyMap {
 
 	void setOnMapLongClickListener(OnMapLongClickListener listener);
 
-	void setOnCameraChangeListener(OnCameraChangeListener listener);
+	void setOnCameraIdleListener(OnCameraIdleListener listener);
 
 	void setOnMarkerClickListener(OnMarkerClickListener listener);
 
@@ -129,9 +129,9 @@ public interface AnyMap {
 
 	}
 
-	interface OnCameraChangeListener {
+	interface OnCameraIdleListener {
 
-		void onCameraChange(CameraPosition cameraPosition);
+		void onCameraIdle();
 
 	}
 

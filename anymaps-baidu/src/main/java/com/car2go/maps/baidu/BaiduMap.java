@@ -162,21 +162,21 @@ public class BaiduMap implements AnyMap {
 	}
 
 	@Override
-	public void setOnCameraChangeListener(final OnCameraChangeListener listener) {
+	public void setOnCameraIdleListener(final OnCameraIdleListener listener) {
 		map.setOnMapStatusChangeListener(new com.baidu.mapapi.map.BaiduMap.OnMapStatusChangeListener() {
 			@Override
 			public void onMapStatusChangeStart(MapStatus mapStatus) {
-				listener.onCameraChange(BaiduToModelConverter.convert(mapStatus));
+
 			}
 
 			@Override
 			public void onMapStatusChange(MapStatus mapStatus) {
-				listener.onCameraChange(BaiduToModelConverter.convert(mapStatus));
+
 			}
 
 			@Override
 			public void onMapStatusChangeFinish(MapStatus mapStatus) {
-				listener.onCameraChange(BaiduToModelConverter.convert(mapStatus));
+				listener.onCameraIdle();
 			}
 		});
 	}

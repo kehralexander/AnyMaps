@@ -134,13 +134,11 @@ public class GoogleMapAdapter implements AnyMap {
 	}
 
 	@Override
-	public void setOnCameraChangeListener(final OnCameraChangeListener listener) {
-		map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+	public void setOnCameraIdleListener(final OnCameraIdleListener listener) {
+		map.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
 			@Override
-			public void onCameraChange(com.google.android.gms.maps.model.CameraPosition cameraPosition) {
-				CameraPosition anyCameraPosition = AnyMapAdapter.adapt(cameraPosition);
-
-				listener.onCameraChange(anyCameraPosition);
+			public void onCameraIdle() {
+				listener.onCameraIdle();
 			}
 		});
 	}
