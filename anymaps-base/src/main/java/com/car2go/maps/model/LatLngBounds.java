@@ -60,6 +60,21 @@ public class LatLngBounds implements Parcelable {
 		return new LatLng(var1, var7);
 	}
 
+	public boolean contains(LatLng location) {
+		// Implementation copied from original obfuscated version of LatLngBounds
+		double lat = location.latitude;
+		return this.southwest.latitude <= lat && lat <= this.northeast.latitude
+				&& this.containsLongitude(location.longitude);
+	}
+
+	private boolean containsLongitude(double lng) {
+		if (this.southwest.longitude <= this.northeast.longitude) {
+			return this.southwest.longitude <= lng && lng <= this.northeast.longitude;
+		} else {
+			return this.southwest.longitude <= lng || lng <= this.northeast.longitude;
+		}
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
