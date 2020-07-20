@@ -193,6 +193,12 @@ public class GoogleMapAdapter implements AnyMap {
 			case SATELLITE:
 				googleMapType = GoogleMap.MAP_TYPE_SATELLITE;
 				break;
+			case HYBRID:
+				googleMapType = GoogleMap.MAP_TYPE_HYBRID;
+				break;
+			case TERRAIN:
+				googleMapType = GoogleMap.MAP_TYPE_TERRAIN;
+				break;
 			case NORMAL:
 			default:
 				googleMapType = GoogleMap.MAP_TYPE_NORMAL;

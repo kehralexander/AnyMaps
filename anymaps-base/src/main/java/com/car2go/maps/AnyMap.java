@@ -75,7 +75,9 @@ public interface AnyMap {
 	enum Type {
 
 		NORMAL,
-		SATELLITE
+		SATELLITE,
+		HYBRID,
+		TERRAIN
 
 	}
 
