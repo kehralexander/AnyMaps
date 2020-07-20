@@ -121,4 +121,9 @@ public class OsmMarker implements Marker {
 	public void setZ(int z) {
 		// Do nothing
 	}
+
+	@Override
+	public void setAnchor(float u, float v) {
+		overlayItem.setMarkerHotspot(anchorToHotspot(u, v));
+	}
 }

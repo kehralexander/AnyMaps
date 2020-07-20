@@ -94,4 +94,9 @@ public class BaiduMarker implements Marker {
 	public void setZ(int z) {
 		this.marker.setZIndex(z);
 	}
+
+	@Override
+	public void setAnchor(float u, float v) {
+		marker.setAnchor(u, v);
+	}
 }

@@ -42,4 +42,12 @@ public interface Marker extends DrawableComponent {
 	 */
 	void setZ(int z);
 
+	/**
+	 * Sets the anchor of the marker
+	 *
+	 * @param u U coordinate of the anchor relative to the icon.
+	 * @param v V coordinate of the anchor relative to the icon.
+	 */
+	void setAnchor(float u, float v);
+
 }

@@ -72,4 +72,9 @@ public class MarkerAdapter implements Marker {
 	public void setZ(int z) {
 		marker.setZIndex(z);
 	}
+
+	@Override
+	public void setAnchor(float u, float v) {
+		marker.setAnchor(u, v);
+	}
 }
