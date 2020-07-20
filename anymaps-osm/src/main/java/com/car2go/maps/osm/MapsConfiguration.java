@@ -33,6 +33,10 @@ public final class MapsConfiguration implements com.car2go.maps.MapsConfiguratio
 	public void initialize(Context context) {
 		BitmapDescriptorFactory.initialize(context);
 		Configuration.getInstance().setUserAgentValue(context.getPackageName());
+
+		// use app private directories so that we do not require storage permission
+		Configuration.getInstance().setOsmdroidTileCache(context.getCacheDir());
+		Configuration.getInstance().setOsmdroidBasePath(context.getFilesDir());
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import android.util.AttributeSet;
 import com.car2go.maps.MapContainerView;
 import com.car2go.maps.OnMapReadyCallback;
 
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.tileprovider.tilesource.XYTileSource;
 
 /**
  * @see MapContainerView
@@ -40,8 +40,10 @@ public class MapView extends MapContainerView {
 
 		addView(mapView);
 
-		mapView.setTileSource(TileSourceFactory.MAPNIK);
+		XYTileSource tileSource = getTileSource();
+		mapView.setTileSource(tileSource);
 		mapView.setMultiTouchControls(true);
+		mapView.setTilesScaledToDpi(true);
 
 		anyMap = new OsmMap(mapView);
 
@@ -49,6 +51,20 @@ public class MapView extends MapContainerView {
 		setLayerType(LAYER_TYPE_SOFTWARE, null);
 
 		applyAttributes(context, attrs);
+	}
+
+	private XYTileSource getTileSource() {
+		int density = (int) Math.ceil(getResources().getDisplayMetrics().density);
+		density = Math.min(density, 8); // maximum supported size is 8x
+
+		String suffix = density > 1 ? "@" + density + "x.png" : ".png";
+		int tileSize = density * 256;
+
+		return new XYTileSource("Carto", 1, 19, tileSize, suffix, new String[]{
+				"https://a.basemaps.cartocdn.com/rastertiles/voyager_labels_under/",
+				"https://b.basemaps.cartocdn.com/rastertiles/voyager_labels_under/",
+				"https://c.basemaps.cartocdn.com/rastertiles/voyager_labels_under/",
+		}, "Map data © OpenStreetMap | Tiles © Carto");
 	}
 
 	private void applyAttributes(Context context, AttributeSet attrs) {
