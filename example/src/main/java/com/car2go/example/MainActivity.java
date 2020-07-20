@@ -9,19 +9,18 @@ package com.car2go.example;
 import android.os.Bundle;
 
 import com.car2go.maps.AnyMap;
-import com.car2go.maps.MapContainerView;
+import com.car2go.maps.MapFragment;
 import com.car2go.maps.OnMapReadyCallback;
 import com.car2go.maps.model.LatLng;
 import com.car2go.maps.model.MarkerOptions;
-import com.car2go.maps.osm.BitmapDescriptorFactory;
-import com.car2go.maps.osm.CameraUpdateFactory;
 import com.car2go.maps.osm.MapsConfiguration;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
 
-	private MapContainerView mapView;
+	private MapFragment mapFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,67 +29,27 @@ public class MainActivity extends AppCompatActivity {
 
 		MapsConfiguration.getInstance().initialize(this);
 
-		mapView = (MapContainerView) findViewById(R.id.map_view);
+		mapFragment = FragmentManager.findFragment(findViewById(R.id.map));
 
-		mapView.onCreate(savedInstanceState);
-
-		mapView.getMapAsync(new OnMapReadyCallback() {
+		mapFragment.getMapAsync(new OnMapReadyCallback() {
 			@Override
-			public void onMapReady(AnyMap anyMap) {
-				anyMap.moveCamera(
-						CameraUpdateFactory.getInstance()
+			public void onMapReady(AnyMap map) {
+				map.moveCamera(
+						map.getCameraUpdateFactory()
 								.newLatLngZoom(
 										new LatLng(53.5443465, 9.9289326),
 										17f
 								)
 				);
 
-				anyMap.addMarker(
+				map.addMarker(
 						new MarkerOptions()
 								.position(new LatLng(53.5443465, 9.9289326))
 								.anchor(0.5f, 0.5f)
-								.icon(
-										BitmapDescriptorFactory.getInstance()
-												.fromResource(R.drawable.marker)
-								)
+								.icon(map.getBitmapDescriptorFactory().fromResource(R.drawable.marker))
 				);
 			}
 		});
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		mapView.onResume();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-		mapView.onPause();
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-
-		mapView.onDestroy();
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-
-		mapView.onSaveInstanceState(outState);
-	}
-
-	@Override
-	public void onLowMemory() {
-		super.onLowMemory();
-
-		mapView.onLowMemory();
 	}
 
 }
