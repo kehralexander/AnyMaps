@@ -12,7 +12,9 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.car2go.maps.AnyMap;
+import com.car2go.maps.BitmapDescriptorFactory;
 import com.car2go.maps.CameraUpdate;
+import com.car2go.maps.CameraUpdateFactory;
 import com.car2go.maps.Projection;
 import com.car2go.maps.UiSettings;
 import com.car2go.maps.model.CameraPosition;
@@ -188,6 +190,16 @@ class OsmMap implements AnyMap {
     @Override
     public void onUserLocationChanged(LatLng location, float accuracy) {
         //Do nothing
+    }
+
+    @Override
+    public BitmapDescriptorFactory getBitmapDescriptorFactory() {
+        return com.car2go.maps.osm.BitmapDescriptorFactory.getInstance();
+    }
+
+    @Override
+    public CameraUpdateFactory getCameraUpdateFactory() {
+        return com.car2go.maps.osm.CameraUpdateFactory.getInstance();
     }
 
     private CameraPosition currentCameraPosition() {

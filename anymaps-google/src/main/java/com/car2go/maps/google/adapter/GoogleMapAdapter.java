@@ -7,11 +7,12 @@
 package com.car2go.maps.google.adapter;
 
 import android.Manifest;
-import androidx.annotation.RequiresPermission;
 import android.view.View;
 
 import com.car2go.maps.AnyMap;
+import com.car2go.maps.BitmapDescriptorFactory;
 import com.car2go.maps.CameraUpdate;
+import com.car2go.maps.CameraUpdateFactory;
 import com.car2go.maps.Projection;
 import com.car2go.maps.UiSettings;
 import com.car2go.maps.model.CameraPosition;
@@ -25,6 +26,8 @@ import com.car2go.maps.model.Polyline;
 import com.car2go.maps.model.PolylineOptions;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+
+import androidx.annotation.RequiresPermission;
 
 /**
  * Implementation of {@link AnyMap} which works with {@link com.google.android.gms.maps.GoogleMap}
@@ -209,6 +212,16 @@ public class GoogleMapAdapter implements AnyMap {
 	@Override
 	public void onUserLocationChanged(com.car2go.maps.model.LatLng location, float accuracy) {
 		//Do nothing
+	}
+
+	@Override
+	public BitmapDescriptorFactory getBitmapDescriptorFactory() {
+		return com.car2go.maps.google.BitmapDescriptorFactory.getInstance();
+	}
+
+	@Override
+	public CameraUpdateFactory getCameraUpdateFactory() {
+		return com.car2go.maps.google.CameraUpdateFactory.getInstance();
 	}
 
 	/**

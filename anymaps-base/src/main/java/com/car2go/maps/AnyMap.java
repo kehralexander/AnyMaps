@@ -68,6 +68,9 @@ public interface AnyMap {
 
 	void onUserLocationChanged(LatLng location, float accuracy);
 
+	BitmapDescriptorFactory getBitmapDescriptorFactory();
+
+	CameraUpdateFactory getCameraUpdateFactory();
 
 	enum Type {
 

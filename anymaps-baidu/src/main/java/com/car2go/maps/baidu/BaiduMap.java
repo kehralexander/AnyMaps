@@ -13,7 +13,9 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
 import com.car2go.maps.AnyMap;
+import com.car2go.maps.BitmapDescriptorFactory;
 import com.car2go.maps.CameraUpdate;
+import com.car2go.maps.CameraUpdateFactory;
 import com.car2go.maps.Projection;
 import com.car2go.maps.UiSettings;
 import com.car2go.maps.baidu.model.BaiduCameraUpdate;
@@ -236,4 +238,13 @@ public class BaiduMap implements AnyMap {
 		map.setMyLocationData(new MyLocationData.Builder().latitude(location.latitude).longitude(location.longitude).accuracy(accuracy).build());
 	}
 
+	@Override
+	public BitmapDescriptorFactory getBitmapDescriptorFactory() {
+		return com.car2go.maps.baidu.BitmapDescriptorFactory.getInstance();
+	}
+
+	@Override
+	public CameraUpdateFactory getCameraUpdateFactory() {
+		return com.car2go.maps.baidu.CameraUpdateFactory.getInstance();
+	}
 }
