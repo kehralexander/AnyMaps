@@ -15,6 +15,7 @@ import com.car2go.maps.MapContainerView;
 import com.car2go.maps.OnMapReadyCallback;
 
 import org.osmdroid.tileprovider.tilesource.XYTileSource;
+import org.osmdroid.views.CustomZoomButtonsController;
 
 /**
  * @see MapContainerView
@@ -43,6 +44,7 @@ public class MapView extends MapContainerView {
 		XYTileSource tileSource = getTileSource();
 		mapView.setTileSource(tileSource);
 		mapView.setMultiTouchControls(true);
+		mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
 		mapView.setTilesScaledToDpi(true);
 
 		anyMap = new OsmMap(mapView);
