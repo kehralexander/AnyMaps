@@ -32,6 +32,7 @@ import com.car2go.maps.model.VisibleRegion;
 import com.car2go.maps.osm.drawable.DrawableComponentFactory;
 
 import org.osmdroid.api.IGeoPoint;
+import org.osmdroid.events.DelayedMapListener;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
 import org.osmdroid.events.ZoomEvent;
@@ -153,7 +154,7 @@ class OsmMap implements AnyMap {
 
     @Override
     public void setOnCameraIdleListener(OnCameraIdleListener listener) {
-        map.addMapListener(new OsmMapListener(listener));
+        map.addMapListener(new DelayedMapListener(new OsmMapListener(listener), 50));
     }
 
     @Override
