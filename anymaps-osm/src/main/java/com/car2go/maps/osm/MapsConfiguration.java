@@ -10,6 +10,8 @@ import android.content.Context;
 
 import com.car2go.maps.AnyMap;
 
+import org.osmdroid.config.Configuration;
+
 import java.util.Collections;
 import java.util.Set;
 
@@ -30,6 +32,7 @@ public final class MapsConfiguration implements com.car2go.maps.MapsConfiguratio
 	@Override
 	public void initialize(Context context) {
 		BitmapDescriptorFactory.initialize(context);
+		Configuration.getInstance().setUserAgentValue(context.getPackageName());
 	}
 
 	@Override

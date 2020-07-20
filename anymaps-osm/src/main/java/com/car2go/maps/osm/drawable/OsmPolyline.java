@@ -81,7 +81,7 @@ public class OsmPolyline implements Polyline {
 		}
 
 		@Override
-		protected void draw(Canvas c, MapView osmv, boolean shadow) {
+		public void draw(Canvas c, MapView osmv, boolean shadow) {
 			Projection projection = osmv.getProjection();
 
 			prepareLines(projection);

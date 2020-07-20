@@ -6,7 +6,7 @@
 
 package com.car2go.maps.model;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 import java.util.ArrayList;
 import java.util.List;

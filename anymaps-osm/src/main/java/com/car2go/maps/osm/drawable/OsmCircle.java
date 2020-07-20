@@ -81,7 +81,7 @@ public class OsmCircle implements Circle {
 		}
 
 		@Override
-		protected void draw(Canvas c, MapView osmv, boolean shadow) {
+		public void draw(Canvas c, MapView osmv, boolean shadow) {
 			Projection projection = osmv.getProjection();
 
 			Point centerPoint = projection.toPixels(position, auxPoint);

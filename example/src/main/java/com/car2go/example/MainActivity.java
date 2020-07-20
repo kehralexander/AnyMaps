@@ -7,7 +7,6 @@
 package com.car2go.example;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.car2go.maps.AnyMap;
 import com.car2go.maps.MapContainerView;
@@ -17,6 +16,8 @@ import com.car2go.maps.model.MarkerOptions;
 import com.car2go.maps.osm.BitmapDescriptorFactory;
 import com.car2go.maps.osm.CameraUpdateFactory;
 import com.car2go.maps.osm.MapsConfiguration;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 

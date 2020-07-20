@@ -7,7 +7,7 @@
 package com.car2go.maps.google.adapter;
 
 import android.Manifest;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresPermission;
 import android.view.View;
 
 import com.car2go.maps.AnyMap;

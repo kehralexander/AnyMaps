@@ -36,7 +36,7 @@ public class MapView extends MapContainerView {
 	}
 
 	private void initView(Context context, AttributeSet attrs) {
-		org.osmdroid.views.MapView mapView = new org.osmdroid.views.MapView(context, null);
+		org.osmdroid.views.MapView mapView = new org.osmdroid.views.MapView(context);
 
 		addView(mapView);
 

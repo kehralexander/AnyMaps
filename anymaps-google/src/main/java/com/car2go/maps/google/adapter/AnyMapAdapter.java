@@ -6,7 +6,7 @@
 
 package com.car2go.maps.google.adapter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.car2go.maps.google.adapter.factory.Mapper;
 import com.car2go.maps.google.adapter.factory.anymap.CameraPositionMapper;

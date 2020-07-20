@@ -19,7 +19,7 @@ class MyLocationHandler {
 	private final MyLocationNewOverlay myLocationOverlay;
 
 	public MyLocationHandler(MapView map) {
-		myLocationOverlay = new MyLocationNewOverlay(map.getContext(), map);
+		myLocationOverlay = new MyLocationNewOverlay(map);
 		map.getOverlays().add(myLocationOverlay);
 	}
 
