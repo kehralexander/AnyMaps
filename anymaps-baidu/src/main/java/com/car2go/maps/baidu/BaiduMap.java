@@ -125,12 +125,22 @@ public class BaiduMap implements AnyMap {
 			}
 
 			@Override
+			public void setTiltGesturesEnabled(boolean enabled) {
+				// Do nothing
+			}
+
+			@Override
 			public void setMyLocationButtonEnabled(boolean enabled) {
 				// Do nothing
 			}
 
 			@Override
 			public void setMapToolbarEnabled(boolean enabled) {
+				// Do nothing
+			}
+
+			@Override
+			public void setIndoorLevelPickerEnabled(boolean enabled) {
 				// Do nothing
 			}
 		};
@@ -200,6 +210,11 @@ public class BaiduMap implements AnyMap {
 	@Override
 	public void setTrafficEnabled(boolean enabled) {
 		map.setTrafficEnabled(enabled);
+	}
+
+	@Override
+	public void setIndoorEnabled(boolean enabled) {
+		// Do nothing
 	}
 
 	@Override

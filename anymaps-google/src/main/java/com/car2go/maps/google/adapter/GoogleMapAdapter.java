@@ -179,6 +179,11 @@ public class GoogleMapAdapter implements AnyMap {
 		map.setTrafficEnabled(enabled);
 	}
 
+	@Override
+	public void setIndoorEnabled(boolean enabled) {
+		map.setIndoorEnabled(enabled);
+	}
+
 	@RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
 	@Override
 	public void setMyLocationEnabled(boolean enabled) {

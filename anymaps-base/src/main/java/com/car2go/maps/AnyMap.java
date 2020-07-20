@@ -60,6 +60,8 @@ public interface AnyMap {
 
 	void setTrafficEnabled(boolean enabled);
 
+	void setIndoorEnabled(boolean enabled);
+
 	void setMyLocationEnabled(boolean enabled);
 
 	void setMapType(Type type);

@@ -172,6 +172,11 @@ class OsmMap implements AnyMap {
     }
 
     @Override
+    public void setIndoorEnabled(boolean enabled) {
+        // Do nothing
+    }
+
+    @Override
     public void setMyLocationEnabled(boolean enabled) {
         myLocationHandler.setMyLocationEnabled(enabled);
     }
@@ -316,12 +321,22 @@ class OsmMap implements AnyMap {
         }
 
         @Override
+        public void setTiltGesturesEnabled(boolean enabled) {
+            // Do nothing
+        }
+
+        @Override
         public void setMyLocationButtonEnabled(boolean enabled) {
             // Do nothing
         }
 
         @Override
         public void setMapToolbarEnabled(boolean enabled) {
+            // Do nothing
+        }
+
+        @Override
+        public void setIndoorLevelPickerEnabled(boolean enabled) {
             // Do nothing
         }
     }

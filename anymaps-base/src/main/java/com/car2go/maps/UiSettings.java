@@ -13,8 +13,12 @@ public interface UiSettings {
 
 	void setAllGesturesEnabled(boolean enabled);
 
+	void setTiltGesturesEnabled(boolean enabled);
+
 	void setMyLocationButtonEnabled(boolean enabled);
 
 	void setMapToolbarEnabled(boolean enabled);
+
+	void setIndoorLevelPickerEnabled(boolean enabled);
 
 }

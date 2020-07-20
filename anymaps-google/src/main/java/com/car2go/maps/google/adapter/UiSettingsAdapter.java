@@ -25,6 +25,11 @@ public class UiSettingsAdapter implements UiSettings {
 	}
 
 	@Override
+	public void setTiltGesturesEnabled(boolean enabled) {
+		uiSettings.setTiltGesturesEnabled(enabled);
+	}
+
+	@Override
 	public void setMyLocationButtonEnabled(boolean enabled) {
 		uiSettings.setMyLocationButtonEnabled(enabled);
 	}
@@ -32,5 +37,10 @@ public class UiSettingsAdapter implements UiSettings {
 	@Override
 	public void setMapToolbarEnabled(boolean enabled) {
 		uiSettings.setMapToolbarEnabled(enabled);
+	}
+
+	@Override
+	public void setIndoorLevelPickerEnabled(boolean enabled) {
+		uiSettings.setIndoorLevelPickerEnabled(enabled);
 	}
 }
