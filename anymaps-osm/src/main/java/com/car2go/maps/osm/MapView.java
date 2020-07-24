@@ -50,7 +50,6 @@ public class MapView extends MapContainerView {
 		anyMap = new OsmMap(mapView);
 
 		setClipToPadding(false);
-		setLayerType(LAYER_TYPE_SOFTWARE, null);
 
 		applyAttributes(context, attrs);
 	}
