@@ -36,6 +36,7 @@ import org.osmdroid.events.DelayedMapListener;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
 import org.osmdroid.events.ZoomEvent;
+import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.views.MapView;
 
 import static com.car2go.maps.osm.util.OsmUtils.toLatLng;
@@ -50,6 +51,7 @@ class OsmMap implements AnyMap {
     private final CameraUpdateHandler cameraUpdateHandler;
     private final MyLocationHandler myLocationHandler;
     private final DrawableComponentFactory drawableComponentFactory;
+    private Context context;
     private final UiSettings uiSettings;
 
     private OnMapClickListener onMapClickListener = OnMapClickListener.NULL;
@@ -57,15 +59,17 @@ class OsmMap implements AnyMap {
 
     private boolean mapEnabled = true;
 
-    OsmMap(MapView map) {
+    OsmMap(MapView map, Context context) {
         this.map = map;
 
         cameraUpdateHandler = new CameraUpdateHandler(map);
         myLocationHandler = new MyLocationHandler(map);
         drawableComponentFactory = new DrawableComponentFactory(map);
+        this.context = context;
         uiSettings = new OsmUiSettings();
 
         map.setOnTouchListener(new MapTouchListener(map.getContext()));
+        setMapStyle(Style.NORMAL);
     }
 
     @Override
@@ -188,6 +192,20 @@ class OsmMap implements AnyMap {
     }
 
     @Override
+    public void setMapStyle(Style style) {
+        switch (style) {
+            case DARK:
+                map.setTileSource(getTileSource(true));
+                break;
+            case NORMAL:
+            default:
+                map.setTileSource(getTileSource(false));
+                break;
+        }
+
+    }
+
+    @Override
     public void setPadding(int left, int top, int right, int bottom) {
         map.setTranslationY((top - bottom) / 2f);
         map.setTranslationX((left - right) / 2f);
@@ -206,6 +224,21 @@ class OsmMap implements AnyMap {
     @Override
     public CameraUpdateFactory getCameraUpdateFactory() {
         return com.car2go.maps.osm.CameraUpdateFactory.getInstance();
+    }
+
+    private XYTileSource getTileSource(boolean dark) {
+        int density = (int) Math.ceil(context.getResources().getDisplayMetrics().density);
+        density = Math.min(density, 8); // maximum supported size is 8x
+
+        String suffix = density > 1 ? "@" + density + "x.png" : ".png";
+        int tileSize = density * 256;
+
+        String style = dark ? "dark_all" : "voyager";
+        return new XYTileSource("Carto", 1, 19, tileSize, suffix, new String[]{
+                "https://a.basemaps.cartocdn.com/rastertiles/" + style + "/",
+                "https://b.basemaps.cartocdn.com/rastertiles/" + style + "/",
+                "https://c.basemaps.cartocdn.com/rastertiles/" + style + "/",
+        }, "Map data © OpenStreetMap | Tiles © Carto");
     }
 
     private CameraPosition currentCameraPosition() {

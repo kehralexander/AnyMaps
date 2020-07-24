@@ -66,6 +66,8 @@ public interface AnyMap {
 
 	void setMapType(Type type);
 
+	void setMapStyle(Style style);
+
 	void setPadding(int left, int top, int right, int bottom);
 
 	void onUserLocationChanged(LatLng location, float accuracy);
@@ -81,6 +83,11 @@ public interface AnyMap {
 		HYBRID,
 		TERRAIN
 
+	}
+
+	enum Style {
+		NORMAL,
+		DARK
 	}
 
 	/**

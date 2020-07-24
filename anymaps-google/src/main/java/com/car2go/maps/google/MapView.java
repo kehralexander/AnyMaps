@@ -77,7 +77,7 @@ public class MapView extends MapContainerView {
 			@Override
 			public void onMapReady(GoogleMap googleMap) {
 				if (map == null) {
-					map = new GoogleMapAdapter(googleMap);
+					map = new GoogleMapAdapter(googleMap, getContext());
 				}
 
 				callback.onMapReady(map);

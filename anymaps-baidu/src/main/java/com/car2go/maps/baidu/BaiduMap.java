@@ -237,6 +237,11 @@ public class BaiduMap implements AnyMap {
 	}
 
 	@Override
+	public void setMapStyle(Style style) {
+		// Do nothing
+	}
+
+	@Override
 	public void setPadding(int left, int top, int right, int bottom) {
 		mapView.setPadding(left, top, right, bottom);
 	}

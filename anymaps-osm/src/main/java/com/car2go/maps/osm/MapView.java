@@ -43,8 +43,6 @@ public class MapView extends MapContainerView {
 
 		addView(mapView);
 
-		XYTileSource tileSource = getTileSource();
-		mapView.setTileSource(tileSource);
 		mapView.setMultiTouchControls(true);
 		mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
 		mapView.setTilesScaledToDpi(true);
@@ -53,7 +51,7 @@ public class MapView extends MapContainerView {
 		co.setTextColor(getSecondaryTextColor());
 		mapView.getOverlays().add(co);
 
-		anyMap = new OsmMap(mapView);
+		anyMap = new OsmMap(mapView, getContext());
 
 		setClipToPadding(false);
 
@@ -66,20 +64,6 @@ public class MapView extends MapContainerView {
 		int color = a.getColor(0, 0);
 		a.recycle();
 		return color;
-	}
-
-	private XYTileSource getTileSource() {
-		int density = (int) Math.ceil(getResources().getDisplayMetrics().density);
-		density = Math.min(density, 8); // maximum supported size is 8x
-
-		String suffix = density > 1 ? "@" + density + "x.png" : ".png";
-		int tileSize = density * 256;
-
-		return new XYTileSource("Carto", 1, 19, tileSize, suffix, new String[]{
-				"https://a.basemaps.cartocdn.com/rastertiles/voyager_labels_under/",
-				"https://b.basemaps.cartocdn.com/rastertiles/voyager_labels_under/",
-				"https://c.basemaps.cartocdn.com/rastertiles/voyager_labels_under/",
-		}, "Map data © OpenStreetMap | Tiles © Carto");
 	}
 
 	private void applyAttributes(Context context, AttributeSet attrs) {

@@ -7,6 +7,7 @@
 package com.car2go.maps.google.adapter;
 
 import android.Manifest;
+import android.content.Context;
 import android.view.View;
 
 import com.car2go.maps.AnyMap;
@@ -15,6 +16,7 @@ import com.car2go.maps.CameraUpdate;
 import com.car2go.maps.CameraUpdateFactory;
 import com.car2go.maps.Projection;
 import com.car2go.maps.UiSettings;
+import com.car2go.maps.google.R;
 import com.car2go.maps.model.CameraPosition;
 import com.car2go.maps.model.Circle;
 import com.car2go.maps.model.CircleOptions;
@@ -26,6 +28,7 @@ import com.car2go.maps.model.Polyline;
 import com.car2go.maps.model.PolylineOptions;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 
 import androidx.annotation.RequiresPermission;
 
@@ -36,11 +39,13 @@ public class GoogleMapAdapter implements AnyMap {
 
 	private final GoogleMap map;
 	private final DrawableComponentFactory drawableComponentFactory;
+	private final Context context;
 
-	public GoogleMapAdapter(GoogleMap map) {
+	public GoogleMapAdapter(GoogleMap map, Context context) {
 		this.map = map;
 
 		drawableComponentFactory = new DrawableComponentFactory(map);
+		this.context = context;
 	}
 
 	@Override
@@ -211,6 +216,20 @@ public class GoogleMapAdapter implements AnyMap {
 		}
 
 		map.setMapType(googleMapType);
+	}
+
+	@Override
+	public void setMapStyle(Style style) {
+		switch (style) {
+			case DARK:
+				map.setMapStyle(
+						MapStyleOptions.loadRawResourceStyle(context, R.raw.maps_night_mode));
+				break;
+			case NORMAL:
+			default:
+				map.setMapStyle(null);
+				break;
+		}
 	}
 
 	@Override
