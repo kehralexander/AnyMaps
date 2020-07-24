@@ -10,12 +10,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 
 import com.car2go.maps.MapContainerView;
 import com.car2go.maps.OnMapReadyCallback;
 
 import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.views.CustomZoomButtonsController;
+import org.osmdroid.views.overlay.CopyrightOverlay;
 
 /**
  * @see MapContainerView
@@ -47,11 +49,23 @@ public class MapView extends MapContainerView {
 		mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
 		mapView.setTilesScaledToDpi(true);
 
+		CopyrightOverlay co = new CopyrightOverlay(context);
+		co.setTextColor(getSecondaryTextColor());
+		mapView.getOverlays().add(co);
+
 		anyMap = new OsmMap(mapView);
 
 		setClipToPadding(false);
 
 		applyAttributes(context, attrs);
+	}
+
+	private int getSecondaryTextColor() {
+		TypedValue typedValue = new TypedValue();
+		TypedArray a = getContext().obtainStyledAttributes(typedValue.data, new int[] { android.R.attr.textColorSecondary });
+		int color = a.getColor(0, 0);
+		a.recycle();
+		return color;
 	}
 
 	private XYTileSource getTileSource() {
