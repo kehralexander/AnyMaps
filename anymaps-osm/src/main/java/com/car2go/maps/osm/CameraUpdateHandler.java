@@ -40,8 +40,8 @@ class CameraUpdateHandler {
 			controller.setZoom(map.getMaxZoomLevel());
 
 			controller.zoomToSpan(
-					(int) ((osmCameraUpdate.bounds.northeast.latitude - osmCameraUpdate.bounds.southwest.latitude) * 1e6),
-					(int) ((osmCameraUpdate.bounds.northeast.longitude - osmCameraUpdate.bounds.southwest.longitude) * 1e6)
+					osmCameraUpdate.bounds.northeast.latitude - osmCameraUpdate.bounds.southwest.latitude,
+					osmCameraUpdate.bounds.northeast.longitude - osmCameraUpdate.bounds.southwest.longitude
 			);
 
 			controller.setCenter(
@@ -52,7 +52,7 @@ class CameraUpdateHandler {
 		}
 
 		if (osmCameraUpdate.zoom != null) {
-			controller.setZoom(osmCameraUpdate.zoom.intValue());
+			controller.setZoom(osmCameraUpdate.zoom);
 		}
 
 		if (osmCameraUpdate.center != null) {
@@ -66,7 +66,22 @@ class CameraUpdateHandler {
 	 * @see AnyMap#animateCamera(CameraUpdate)
 	 */
 	public void animateCamera(CameraUpdate cameraUpdate) {
-		moveCamera(cameraUpdate);
+		final OsmCameraUpdate osmCameraUpdate = (OsmCameraUpdate) cameraUpdate;
+		final IMapController controller = map.getController();
+
+		if (osmCameraUpdate.bounds != null) {
+			// animation to bounds not supported by OSM
+			moveCamera(cameraUpdate);
+		}
+
+		if (osmCameraUpdate.zoom != null && osmCameraUpdate.center != null) {
+			controller.animateTo(toGeoPoint(osmCameraUpdate.center),
+					osmCameraUpdate.zoom.doubleValue(), null);
+		} else if (osmCameraUpdate.zoom != null) {
+			controller.zoomTo(osmCameraUpdate.zoom);
+		} else if (osmCameraUpdate.center != null) {
+			controller.animateTo(toGeoPoint(osmCameraUpdate.center));
+		}
 	}
 
 	/**
