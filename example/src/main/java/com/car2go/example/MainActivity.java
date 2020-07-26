@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		com.car2go.maps.mapbox.MapsConfiguration.getInstance().initialize(this);
 		setContentView(R.layout.activity_main);
 
 		MapsConfiguration.getInstance().initialize(this);

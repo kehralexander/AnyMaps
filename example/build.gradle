@@ -31,10 +31,11 @@ dependencies {
     implementation project(':anymaps-base')
 
     // If you are adding Google Maps support you also need to add Google Play Services
-    //implementation project(':anymaps-google')
+    implementation project(':anymaps-google')
+    implementation project(":anymaps-mapbox")
     implementation project(':anymaps-osm')
 
-    //implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
 }

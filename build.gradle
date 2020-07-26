@@ -31,6 +31,7 @@ allprojects {
         jcenter()
         mavenCentral()
         google()
+        maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
     }
     group = 'com.car2go.anylibs'
     version = "${versionMajor}.${versionMinor}.${versionPatch}"

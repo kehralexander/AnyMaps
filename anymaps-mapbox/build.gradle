@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2015 Daimler AG / Moovel GmbH
+ *
+ * All rights reserved
+ */
+ext {
+    name = 'AnyMaps - Mapbox'
+    artifactId = 'anymaps.mapbox'
+    description = 'Mapbox version of AnyMaps'
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation project(':anymaps-base')
+
+    implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.1') {
+        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-android-accounts'
+    }
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0-SNAPSHOT'
+
+    testImplementation 'junit:junit:4.13'
+}

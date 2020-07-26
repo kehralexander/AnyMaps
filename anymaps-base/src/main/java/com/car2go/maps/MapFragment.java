@@ -43,6 +43,7 @@ public class MapFragment extends Fragment {
 		String[] classes = new String[]{
 				"com.car2go.maps.google.MapView",
 				"com.car2go.maps.baidu.MapView",
+				"com.car2go.maps.mapbox.MapView",
 				"com.car2go.maps.osm.MapView"
 		};
 		for (String name : classes) {
