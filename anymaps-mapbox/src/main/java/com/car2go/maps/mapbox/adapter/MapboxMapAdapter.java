@@ -243,6 +243,13 @@ public class MapboxMapAdapter implements AnyMap, Style.OnStyleLoaded {
 		if (enabled) {
 			enableLocation();
 		} else {
+			disableLocation();
+		}
+	}
+
+	@RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+	private void disableLocation() {
+		if (map.getLocationComponent().isLocationComponentActivated()) {
 			map.getLocationComponent().setLocationComponentEnabled(false);
 		}
 	}
