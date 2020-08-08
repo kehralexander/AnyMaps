@@ -11,8 +11,7 @@
     android:layout_height="match_parent"
     tools:context="com.car2go.example.MainActivity">
 
-    <fragment
-        android:name="com.car2go.maps.MapFragment"
+    <FrameLayout
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -13,13 +13,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+/**
+ * Fragment containing an {@link AnyMap}. Can be used in the same fashion as Google Maps'
+ * MapFragment and automatically takes care of the map lifecycle. It
+ */
 public class MapFragment extends Fragment {
 	private MapContainerView map;
+	public static final String GOOGLE = "com.car2go.maps.google";
+	public static final String BAIDU = "com.car2go.maps.baidu";
+	public static final String OSM = "com.car2go.maps.osm";
+	public static final String MAPBOX = "com.car2go.maps.mapbox";
+
+	private String[] priority = {GOOGLE, BAIDU, OSM, MAPBOX};
+
+	private Queue<OnMapReadyCallback> waitingCallbacks = new LinkedList<>();
 
 	@Nullable
 	@Override
@@ -28,7 +44,34 @@ public class MapFragment extends Fragment {
 	}
 
 	public void getMapAsync(@NonNull OnMapReadyCallback callback) {
-		map.getMapAsync(callback);
+		if (map != null) {
+			map.getMapAsync(callback);
+		} else {
+			// onCreate was not called yet, add callback to queue
+			waitingCallbacks.add(callback);
+		}
+	}
+
+	/**
+	 * Sets the priority order in which to use the AnyMap backends. Supported backends are:
+	 * <p><ul>
+	 * <li>Google Maps ({@link #GOOGLE})
+	 * <li>Baidu Maps ({@link #BAIDU})
+	 * <li>OpenStreetMap (OSMDroid) ({@link #OSM})
+	 * <li>OpenStreetMap (Mapbox) ({@link #MAPBOX})
+	 * </ul><p>
+	 * Only backends for which the corresponding AnyMaps library (e.g. anymaps-google) is available
+	 * will be used.
+	 *
+	 * @param priority Array of backend identifiers
+	 */
+	public void setPriority(String[] priority) {
+		if (map != null) {
+			throw new IllegalStateException("setPriority has to be called before the " +
+					"MapFragment's onCreate() is called");
+		}
+
+		this.priority = priority;
 	}
 
 	@Override
@@ -37,20 +80,23 @@ public class MapFragment extends Fragment {
 
 		super.onCreate(savedInstanceState);
 		map.onCreate(savedInstanceState);
+
+		while (!waitingCallbacks.isEmpty()) {
+			// handle getMapAsync calls done before onCreate was called
+			map.getMapAsync(waitingCallbacks.remove());
+		}
 	}
 
 	private MapContainerView createMap() {
-		String[] classes = new String[]{
-				"com.car2go.maps.google.MapView",
-				"com.car2go.maps.baidu.MapView",
-				"com.car2go.maps.mapbox.MapView",
-				"com.car2go.maps.osm.MapView"
-		};
-		for (String name : classes) {
-			Class<MapContainerView> clazz = getMapClass(name);
+		for (String name : priority) {
+			Class<MapsConfiguration> clazz = getConfigClass(name);
 			if (clazz != null) {
 				try {
-					return clazz.getConstructor(Context.class).newInstance(getContext());
+					MapsConfiguration config = (MapsConfiguration) clazz.getMethod("getInstance").invoke(null);
+					config.initialize(requireContext());
+
+					Class<MapContainerView> mapClass = getMapClass(name);
+					return mapClass.getConstructor(Context.class).newInstance(getContext());
 				} catch (IllegalAccessException e) {
 					throw new RuntimeException(e);
 				} catch (java.lang.InstantiationException e) {
@@ -65,9 +111,17 @@ public class MapFragment extends Fragment {
 		return null;
 	}
 
-	private Class<MapContainerView> getMapClass(String name) {
+	private Class<MapContainerView> getMapClass(String pkg) {
 		try {
-			return (Class<MapContainerView>) Class.forName(name);
+			return (Class<MapContainerView>) Class.forName(pkg + ".MapView");
+		} catch (ClassNotFoundException e) {
+			return null;
+		}
+	}
+
+	private Class<MapsConfiguration> getConfigClass(String pkg) {
+		try {
+			return (Class<MapsConfiguration>) Class.forName(pkg + ".MapsConfiguration");
 		} catch (ClassNotFoundException e) {
 			return null;
 		}

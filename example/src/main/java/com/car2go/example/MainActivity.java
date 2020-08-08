@@ -13,10 +13,8 @@ import com.car2go.maps.MapFragment;
 import com.car2go.maps.OnMapReadyCallback;
 import com.car2go.maps.model.LatLng;
 import com.car2go.maps.model.MarkerOptions;
-import com.car2go.maps.osm.MapsConfiguration;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,12 +23,14 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		com.car2go.maps.mapbox.MapsConfiguration.getInstance().initialize(this);
 		setContentView(R.layout.activity_main);
 
-		MapsConfiguration.getInstance().initialize(this);
-
-		mapFragment = FragmentManager.findFragment(findViewById(R.id.map));
+		mapFragment = new MapFragment();
+		mapFragment.setPriority(new String[]{MapFragment.OSM});
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.map, mapFragment)
+				.commit();
 
 		mapFragment.getMapAsync(new OnMapReadyCallback() {
 			@Override
