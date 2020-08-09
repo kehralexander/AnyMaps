@@ -313,7 +313,8 @@ public class MapboxMapAdapter implements AnyMap, Style.OnStyleLoaded {
 			anyMapAdapter.drawableComponentFactory = this.drawableComponentFactory;
 		}
 
-		if (location && !map.getLocationComponent().isLocationComponentEnabled()) {
+		if (location && (!map.getLocationComponent().isLocationComponentActivated()
+				|| !map.getLocationComponent().isLocationComponentEnabled())) {
 			enableLocation();
 		}
 
