@@ -8,8 +8,6 @@ package com.car2go.maps.mapbox;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 
 import com.car2go.maps.mapbox.adapter.BitmapDescriptorAdapter;
 import com.car2go.maps.model.BitmapDescriptor;
@@ -53,13 +51,9 @@ public class BitmapDescriptorFactory implements com.car2go.maps.BitmapDescriptor
 
 	@Override
 	public BitmapDescriptor fromResource(@DrawableRes int resourceId) {
-		Drawable drawable = BitmapUtils.getDrawableFromRes(context, resourceId);
-		if (drawable instanceof BitmapDrawable) {
-			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-			return fromBitmap(bitmapDrawable.getBitmap());
-		} else {
-			throw new IllegalArgumentException("Failed to decode image. The resource provided must be a Bitmap.");
-		}
+		Bitmap bitmap = BitmapUtils.getBitmapFromDrawable(
+				BitmapUtils.getDrawableFromRes(context, resourceId));
+		return fromBitmap(bitmap);
 	}
 
 }
