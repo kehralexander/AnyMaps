@@ -38,6 +38,13 @@ public class MapFragment extends Fragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		map = createMap();
+		map.onCreate(savedInstanceState);
+
+		while (!waitingCallbacks.isEmpty()) {
+			// handle getMapAsync calls done before onCreate was called
+			map.getMapAsync(waitingCallbacks.remove());
+		}
 		return map;
 	}
 
@@ -70,19 +77,6 @@ public class MapFragment extends Fragment {
 		}
 
 		this.priority = priority;
-	}
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		map = createMap();
-
-		super.onCreate(savedInstanceState);
-		map.onCreate(savedInstanceState);
-
-		while (!waitingCallbacks.isEmpty()) {
-			// handle getMapAsync calls done before onCreate was called
-			map.getMapAsync(waitingCallbacks.remove());
-		}
 	}
 
 	private MapContainerView createMap() {
