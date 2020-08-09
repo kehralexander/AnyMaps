@@ -28,8 +28,8 @@ public class LatLngBoundsMapper implements Mapper<LatLngBounds, com.mapbox.mapbo
 		LatLng northEast = anyMapAdapter.map(input.northeast);
 
 		return com.mapbox.mapboxsdk.geometry.LatLngBounds.from(
-				southWest.getLatitude(), southWest.getLongitude(),
-				northEast.getLatitude(), northEast.getLongitude());
+				northEast.getLatitude(), northEast.getLongitude(),
+				southWest.getLatitude(), southWest.getLongitude());
 	}
 
 }
