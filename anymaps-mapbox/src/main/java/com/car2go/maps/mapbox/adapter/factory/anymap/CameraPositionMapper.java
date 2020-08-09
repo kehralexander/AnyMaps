@@ -28,7 +28,7 @@ public class CameraPositionMapper implements Mapper<CameraPosition, com.car2go.m
 
 		return new com.car2go.maps.model.CameraPosition(
 				anyLatLng,
-				(float) input.zoom
+				(float) input.zoom + 1 // mapbox zoom levels are shifted by one
 		);
 	}
 

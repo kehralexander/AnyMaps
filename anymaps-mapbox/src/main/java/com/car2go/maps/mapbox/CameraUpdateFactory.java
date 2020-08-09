@@ -30,7 +30,7 @@ public class CameraUpdateFactory implements com.car2go.maps.CameraUpdateFactory 
 		return new CameraUpdateAdapter(
 				com.mapbox.mapboxsdk.camera.CameraUpdateFactory.newLatLngZoom(
 						googleLatLng,
-						zoomLevel
+						zoomLevel - 1  // mapbox zoom levels are shifted by one
 				)
 		);
 	}
@@ -50,7 +50,8 @@ public class CameraUpdateFactory implements com.car2go.maps.CameraUpdateFactory 
 	@Override
 	public CameraUpdate zoomTo(float zoomLevel) {
 		return new CameraUpdateAdapter(
-				com.mapbox.mapboxsdk.camera.CameraUpdateFactory.zoomTo(zoomLevel)
+				// mapbox zoom levels are shifted by one
+				com.mapbox.mapboxsdk.camera.CameraUpdateFactory.zoomTo(zoomLevel - 1)
 		);
 	}
 
