@@ -40,11 +40,13 @@ public class GoogleMapAdapter implements AnyMap {
 	private final GoogleMap map;
 	private final DrawableComponentFactory drawableComponentFactory;
 	private final Context context;
+	private final BitmapDescriptorFactory bitmapDescriptorFactory;
 
 	public GoogleMapAdapter(GoogleMap map, Context context) {
 		this.map = map;
 
 		drawableComponentFactory = new DrawableComponentFactory(map);
+		bitmapDescriptorFactory = new com.car2go.maps.google.BitmapDescriptorFactory(context);
 		this.context = context;
 	}
 
@@ -244,7 +246,7 @@ public class GoogleMapAdapter implements AnyMap {
 
 	@Override
 	public BitmapDescriptorFactory getBitmapDescriptorFactory() {
-		return com.car2go.maps.google.BitmapDescriptorFactory.getInstance();
+		return bitmapDescriptorFactory;
 	}
 
 	@Override
