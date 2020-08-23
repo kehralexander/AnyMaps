@@ -8,27 +8,28 @@ package com.mapbox.android.telemetry;
 
 import android.content.Context;
 
+@SuppressWarnings("unused")
 public class MapboxTelemetry {
 	public MapboxTelemetry(Context appContext, String accessToken, String mapboxEventsUserAgent) {
 
 	}
 
-	public void enable() {
-
+	public boolean enable() {
+		return false;
 	}
 
-	public void push(Event event) {
-
+	public boolean push(Event event) {
+		return true;
 	}
 
-	public void disable() {
-
+	public boolean disable() {
+		return false;
 	}
 
 	public void updateDebugLoggingEnabled(boolean debugLoggingEnabled) {
 	}
 
 	public boolean updateSessionIdRotationInterval(SessionInterval sessionInterval) {
-		return false;
+		return true;
 	}
 }

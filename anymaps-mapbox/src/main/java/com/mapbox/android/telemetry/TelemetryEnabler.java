@@ -6,6 +6,7 @@
 
 package com.mapbox.android.telemetry;
 
+@SuppressWarnings("unused")
 public class TelemetryEnabler {
 	public static TelemetryEnabler.State retrieveTelemetryStateFromPreferences() {
 		return State.DISABLED;

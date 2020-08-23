@@ -6,6 +6,7 @@
 
 package com.mapbox.android.telemetry;
 
+@SuppressWarnings("unused")
 public class TelemetryUtils {
 	public static String retrieveVendorId() {
 		return null;
