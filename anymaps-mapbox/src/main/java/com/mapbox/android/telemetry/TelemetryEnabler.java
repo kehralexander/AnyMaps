@@ -12,8 +12,8 @@ public class TelemetryEnabler {
 		return State.DISABLED;
 	}
 
-	public static void updateTelemetryState(State enabled) {
-
+	public static State updateTelemetryState(State enabled) {
+		return enabled;
 	}
 
 	public enum State {ENABLED, DISABLED}
