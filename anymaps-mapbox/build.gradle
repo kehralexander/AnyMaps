@@ -35,7 +35,10 @@ dependencies {
         exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-android-accounts'
         exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-android-telemetry'
     }
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0-SNAPSHOT'
+    implementation('com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0-SNAPSHOT') {
+        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-android-accounts'
+        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-android-telemetry'
+    }
 
     testImplementation 'junit:junit:4.13'
 }
