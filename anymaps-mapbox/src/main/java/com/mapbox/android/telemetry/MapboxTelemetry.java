@@ -17,10 +17,6 @@ public class MapboxTelemetry {
 
 	}
 
-	public void push(AppUserTurnstile turnstileEvent) {
-
-	}
-
 	public void push(Event event) {
 
 	}
