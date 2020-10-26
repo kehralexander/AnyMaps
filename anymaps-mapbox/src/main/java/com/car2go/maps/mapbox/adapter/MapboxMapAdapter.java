@@ -172,6 +172,16 @@ public class MapboxMapAdapter implements AnyMap, Style.OnStyleLoaded {
 	}
 
 	@Override
+	public void setOnCameraMoveListener(final OnCameraMoveListener listener) {
+		map.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+			@Override
+			public void onCameraMove() {
+				listener.onCameraMove();
+			}
+		});
+	}
+
+	@Override
 	public void setOnMarkerClickListener(final OnMarkerClickListener listener) {
 		drawableComponentFactory.symbolManager.addClickListener(new OnSymbolClickListener() {
 			@Override

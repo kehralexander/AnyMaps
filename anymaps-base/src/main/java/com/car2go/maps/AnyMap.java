@@ -54,6 +54,8 @@ public interface AnyMap {
 
 	void setOnCameraIdleListener(OnCameraIdleListener listener);
 
+	void setOnCameraMoveListener(OnCameraMoveListener listener);
+
 	void setOnMarkerClickListener(OnMarkerClickListener listener);
 
 	void setInfoWindowAdapter(InfoWindowAdapter adapter);
@@ -143,6 +145,12 @@ public interface AnyMap {
 	interface OnCameraIdleListener {
 
 		void onCameraIdle();
+
+	}
+
+	interface OnCameraMoveListener {
+
+		void onCameraMove();
 
 	}
 
