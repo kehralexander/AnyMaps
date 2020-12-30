@@ -79,6 +79,15 @@ public class MapFragment extends Fragment {
 		this.priority = priority;
 	}
 
+	/**
+	 * Gets the current map backend priority.
+	 *
+	 * @return priority Array of backend identifiers
+	 */
+	public String[] getPriority() {
+		return this.priority;
+	}
+
 	private MapContainerView createMap() {
 		for (String name : priority) {
 			Class<MapsConfiguration> clazz = getConfigClass(name);
