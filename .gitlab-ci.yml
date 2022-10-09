@@ -21,7 +21,7 @@ build:apk:
     - set +o pipefail
     - set -o pipefail
   script:
-    - ./gradlew assembleDebug
+    - ./gradlew check
   artifacts:
     paths:
       - "*.jar"
