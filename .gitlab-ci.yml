@@ -24,4 +24,4 @@ build:apk:
     - ./gradlew assembleDebug
   artifacts:
     paths:
-      - app/build/outputs/
+      - "*.jar"
