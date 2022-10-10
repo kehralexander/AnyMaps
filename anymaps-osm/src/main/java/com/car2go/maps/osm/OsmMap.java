@@ -241,6 +241,11 @@ class OsmMap implements AnyMap {
         return com.car2go.maps.osm.CameraUpdateFactory.getInstance();
     }
 
+    @Override
+    public void setFollowMode(FollowMode mode) {
+
+    }
+
     private XYTileSource getTileSource(boolean dark) {
         int density = (int) Math.ceil(context.getResources().getDisplayMetrics().density);
         density = Math.min(density, 8); // maximum supported size is 8x

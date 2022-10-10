@@ -82,6 +82,8 @@ public interface AnyMap {
 
 	CameraUpdateFactory getCameraUpdateFactory();
 
+	void setFollowMode(FollowMode mode);
+
 	enum Type {
 
 		NORMAL,
@@ -89,6 +91,12 @@ public interface AnyMap {
 		HYBRID,
 		TERRAIN
 
+	}
+
+	enum FollowMode {
+		NONE,
+		FOLLOW,
+		FOLLOW_BEARING
 	}
 
 	enum Style {

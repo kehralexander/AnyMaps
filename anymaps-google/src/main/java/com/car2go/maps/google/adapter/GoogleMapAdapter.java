@@ -279,6 +279,11 @@ public class GoogleMapAdapter implements AnyMap {
 		return com.car2go.maps.google.CameraUpdateFactory.getInstance();
 	}
 
+	@Override
+	public void setFollowMode(FollowMode mode) {
+
+	}
+
 	/**
 	 * Delegates callbacks from Google map to given AnyMap callback
 	 */

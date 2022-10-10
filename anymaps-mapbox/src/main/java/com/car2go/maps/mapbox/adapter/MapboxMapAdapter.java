@@ -282,7 +282,6 @@ public class MapboxMapAdapter implements AnyMap, Style.OnStyleLoaded {
 					.builder(context, map.getStyle()).build();
 			map.getLocationComponent().activateLocationComponent(options);
 			map.getLocationComponent().setLocationComponentEnabled(true);
-			map.getLocationComponent().setCameraMode(CameraMode.TRACKING);
 		}
 	}
 
@@ -292,7 +291,17 @@ public class MapboxMapAdapter implements AnyMap, Style.OnStyleLoaded {
 		updateMapStyle();
 	}
 
-	public void setCameraMode(int mode) {
+	@Override
+	public void setFollowMode(FollowMode followMode) {
+		int mode = CameraMode.NONE;
+		switch (followMode) {
+			case FOLLOW:
+				mode = CameraMode.TRACKING;
+				break;
+			case FOLLOW_BEARING:
+				mode = CameraMode.TRACKING_GPS;
+				break;
+		}
 		map.getLocationComponent().setCameraMode(mode);
 	}
 

@@ -312,4 +312,9 @@ public class BaiduMap implements AnyMap {
 	public CameraUpdateFactory getCameraUpdateFactory() {
 		return com.car2go.maps.baidu.CameraUpdateFactory.getInstance();
 	}
+
+	@Override
+	public void setFollowMode(FollowMode mode) {
+
+	}
 }
