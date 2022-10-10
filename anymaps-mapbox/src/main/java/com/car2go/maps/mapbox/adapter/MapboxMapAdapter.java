@@ -28,6 +28,7 @@ import com.car2go.maps.model.Polyline;
 import com.car2go.maps.model.PolylineOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
@@ -281,6 +282,7 @@ public class MapboxMapAdapter implements AnyMap, Style.OnStyleLoaded {
 					.builder(context, map.getStyle()).build();
 			map.getLocationComponent().activateLocationComponent(options);
 			map.getLocationComponent().setLocationComponentEnabled(true);
+			map.getLocationComponent().setCameraMode(CameraMode.TRACKING);
 		}
 	}
 
@@ -288,6 +290,10 @@ public class MapboxMapAdapter implements AnyMap, Style.OnStyleLoaded {
 	public void setMapType(Type type) {
 		this.mapType = type;
 		updateMapStyle();
+	}
+
+	public void setCameraMode(int mode) {
+		map.getLocationComponent().setCameraMode(mode);
 	}
 
 	@Override
