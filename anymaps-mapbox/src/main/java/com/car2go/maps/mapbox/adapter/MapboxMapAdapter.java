@@ -314,6 +314,11 @@ public class MapboxMapAdapter implements AnyMap, Style.OnStyleLoaded {
 	}
 
 	@Override
+	public void setOrientation(float degrees) {
+		//Do nothing
+	}
+
+	@Override
 	public BitmapDescriptorFactory getBitmapDescriptorFactory() {
 		return bitmapDescriptorFactory;
 	}

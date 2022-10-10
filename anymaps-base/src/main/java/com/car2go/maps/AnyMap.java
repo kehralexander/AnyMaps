@@ -76,6 +76,8 @@ public interface AnyMap {
 
 	void onUserLocationChanged(LatLng location, float accuracy);
 
+	void setOrientation(float degrees);
+
 	BitmapDescriptorFactory getBitmapDescriptorFactory();
 
 	CameraUpdateFactory getCameraUpdateFactory();

@@ -299,6 +299,11 @@ public class BaiduMap implements AnyMap {
 	}
 
 	@Override
+	public void setOrientation(float degrees) {
+		// Do nothing
+	}
+
+	@Override
 	public BitmapDescriptorFactory getBitmapDescriptorFactory() {
 		return com.car2go.maps.baidu.BitmapDescriptorFactory.getInstance();
 	}

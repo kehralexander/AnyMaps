@@ -265,6 +265,11 @@ public class GoogleMapAdapter implements AnyMap {
 	}
 
 	@Override
+	public void setOrientation(float degrees) {
+		//Do nothing
+	}
+
+	@Override
 	public BitmapDescriptorFactory getBitmapDescriptorFactory() {
 		return bitmapDescriptorFactory;
 	}

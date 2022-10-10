@@ -227,6 +227,11 @@ class OsmMap implements AnyMap {
     }
 
     @Override
+    public void setOrientation(float degrees) {
+        map.setMapOrientation(degrees);
+    }
+
+    @Override
     public BitmapDescriptorFactory getBitmapDescriptorFactory() {
         return com.car2go.maps.osm.BitmapDescriptorFactory.getInstance();
     }
